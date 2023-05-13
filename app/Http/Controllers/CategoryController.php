@@ -35,8 +35,5 @@ class CategoryController extends Controller
         return redirect()->back()->with('success', 'Category updated successfully!');
     }
 
-    public function getDeleteCategory($id) {
-        Category::destroy($id);
-        return back();
-    }
+
 }
