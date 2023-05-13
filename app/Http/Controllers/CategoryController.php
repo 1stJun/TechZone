@@ -17,6 +17,9 @@ class CategoryController extends Controller
     }
 
     public function postAddCategory(Request $request) {
+        $request->validate([
+            'name' => 'required|unique:categories,catName,'.$request->id.',catID|string|max:255',
+        ]);
         $cate = new Category();
         $cate->catName = $request->name;
         $cate->save();
@@ -28,8 +31,11 @@ class CategoryController extends Controller
         return view('admin.editcategory', compact('category'));
     }
 
-    public function postEditCategory(Request $request, $id) {
-        $category = Category::find($id);
+    public function postEditCategory(Request $request) {
+        $request->validate([
+            'name' => 'required|unique:categories,catName,'.$request->id.',catID|string|max:255',
+        ]);
+        $category = Category::find($request->id);
         $category->catName = $request->name;
         $category->save();
         return redirect()->back()->with('success', 'Category updated successfully!');

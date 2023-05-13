@@ -47,6 +47,11 @@ class CustomerController extends Controller
     }
 
     public function postLogin(Request $request) {
+        $request->validate([
+            'customerEmail' => 'required|email',
+            'customerPass' => 'required|min:6',
+        ]);
+
         $customer = Customer::where('customerEmail', $request->customerEmail)->first();
         if ($customer) {
             if (Hash::check($request->customerPass, $customer->customerPass)) {

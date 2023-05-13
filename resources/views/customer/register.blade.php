@@ -19,25 +19,45 @@
 
                         <div class="auth-form__form">
                             <div class="auth-form__group">
-                                <input type="text" name="customerPhone" class="auth-form__input" placeholder="Enter your phone number">
+                                <input type="text" name="customerPhone" class="auth-form__input"
+                                    placeholder="Enter your phone number">
                                 <i class="fa-solid fa-phone"></i>
                             </div>
+                            @if ($errors->has('customerPhone'))
+                                <span class="text-danger">{{ $errors->first('customerPhone') }}</span>
+                            @endif
                             <div class="auth-form__group">
-                                <input type="email" name="customerEmail" class="auth-form__input" placeholder="Enter your email">
+                                <input type="email" name="customerEmail" class="auth-form__input"
+                                    placeholder="Enter your email">
                                 <i class="fa-solid fa-envelope"></i>
                             </div>
+                            @if ($errors->has('customerEmail'))
+                                <span class="text-danger">{{ $errors->first('customerEmail') }}</span>
+                            @endif
                             <div class="auth-form__group">
-                                <input type="text" name="customerName" class="auth-form__input" placeholder="Enter your username">
+                                <input type="text" name="customerName" class="auth-form__input"
+                                    placeholder="Enter your username">
                                 <i class="fa-solid fa-user"></i>
                             </div>
+                            @if ($errors->has('customerName'))
+                                <span class="text-danger">{{ $errors->first('customerName') }}</span>
+                            @endif
                             <div class="auth-form__group">
-                                <input type="password" name="customerPass" class="auth-form__input" placeholder="Enter your password">
+                                <input type="password" name="customerPass" class="auth-form__input"
+                                    placeholder="Enter your password">
                                 <i class="fa-solid fa-lock"></i>
                             </div>
+                            @if ($errors->has('customerPass'))
+                                <span class="text-danger">{{ $errors->first('customerPass') }}</span>
+                            @endif
                             <div class="auth-form__group">
-                                <input type="password" name="customerPass" class="auth-form__input" placeholder="Confirm your password">
+                                <input type="password" name="customerPass" class="auth-form__input"
+                                    placeholder="Confirm your password">
                                 <i class="fa-solid fa-lock"></i>
                             </div>
+                            @if ($errors->has('customerPass'))
+                                <span class="text-danger">{{ $errors->first('customerPass') }}</span>
+                            @endif
                         </div>
 
                         <div class="auth-form__controls">
@@ -46,25 +66,25 @@
                         </div>
 
                         <!-- <div class="separate">
-                                            <div class="cross"></div>
-                                            <span class="or">OR</span>
-                                            <div class="cross"></div>
-                                        </div>
+                                                <div class="cross"></div>
+                                                <span class="or">OR</span>
+                                                <div class="cross"></div>
+                                            </div>
 
-                                        <div class="auth-form__socials">
-                                            <button class="btn btn--normal">
-                                                <div class="social-icon">
-                                                    <div class="social-icon__facebook"></div>
-                                                </div>
-                                                <span>Facebook</span>
-                                            </button>
-                                            <button class="btn btn--normal">
-                                                <div class="social-icon">
-                                                    <div class="social-icon__google"></div>
-                                                </div>
-                                                <span>Google</span>
-                                            </button>
-                                        </div> -->
+                                            <div class="auth-form__socials">
+                                                <button class="btn btn--normal">
+                                                    <div class="social-icon">
+                                                        <div class="social-icon__facebook"></div>
+                                                    </div>
+                                                    <span>Facebook</span>
+                                                </button>
+                                                <button class="btn btn--normal">
+                                                    <div class="social-icon">
+                                                        <div class="social-icon__google"></div>
+                                                    </div>
+                                                    <span>Google</span>
+                                                </button>
+                                            </div> -->
                     </form>
                 </div>
             </div>

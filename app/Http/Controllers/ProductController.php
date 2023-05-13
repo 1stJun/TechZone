@@ -11,6 +11,7 @@ class ProductController extends Controller
     public function getProduct() {
         $products = Product::select('products.*', 'categories.catName')
                 ->join('categories', 'products.catID', '=', 'categories.catID')
+                ->orderBy('productID', 'ASC')
                 ->paginate(4);
         return view('admin.product', compact('products'));
     }
@@ -21,6 +22,15 @@ class ProductController extends Controller
     }
 
     public function postAddProduct(Request $request) {
+        $request->validate([
+            'name' => 'required|unique:products,productName,'.$request->id.',productID|string|max:255',
+            'image' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'list_price' => 'required|numeric',
+            'quantity' => 'required|integer',
+            'description' => 'nullable|string|max:500',
+        ]);
+
         $product = new Product();
         $product->productName = $request->name;
         $product->productImage = $request->image;
@@ -40,6 +50,15 @@ class ProductController extends Controller
     }
 
     public function postEditProduct(Request $request) {
+        $request->validate([
+            'name' => 'required|unique:products,productName,'.$request->id.',productID|string|max:255',
+            'image' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'list_price' => 'required|numeric',
+            'quantity' => 'required|integer',
+            'description' => 'nullable|string|max:500',
+        ]);
+
         Product::where('productID', $request->id)->update([
             'productName' => $request->name,
             'productImage' => $request->image,

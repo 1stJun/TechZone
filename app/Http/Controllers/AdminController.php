@@ -28,7 +28,7 @@ class AdminController extends Controller
     public function postLogin(Request $request) {        
         $credentials = $request->validate([
             'username' => 'required',
-            'password' => 'required',
+            'password' => 'required|min:6',
         ]);
     
         $admin = Admin::where('adminUsername', $credentials['username'])->first();

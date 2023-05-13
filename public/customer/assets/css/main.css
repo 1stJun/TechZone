@@ -197,6 +197,12 @@
     text-decoration: none;
 }
 
+.auth-form__form .text-danger {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    color: red;
+}
+
 .auth-form__group {
     position: relative;
 }

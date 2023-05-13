@@ -19,6 +19,9 @@
                                 <span class="details">Name</span>
                                 <input type="text" id="name" name="name" placeholder="Enter category name"
                                     value="{{ $category->catName }}">
+                                @if ($errors->has('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
                             </div>
                         </div>
                         <button type="submit" class="button">Update</button>

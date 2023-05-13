@@ -17,8 +17,10 @@
                         <div class="product-details">
                             <div class="input-box category">
                                 <span class="details">Name</span>
-                                <input type="text" id="name" name="name" placeholder="Enter category name"
-                                    required>
+                                <input type="text" id="name" name="name" placeholder="Enter category name">
+                                @if ($errors->has('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
                             </div>
                         </div>
                         <button type="submit" class="button">Create</button>
