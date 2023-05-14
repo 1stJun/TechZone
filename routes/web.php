@@ -66,7 +66,7 @@ Route::prefix('admin')->group(function () {
     Route::get('logout', [AdminController::class, 'getLogout']);
     Route::get('index', [AdminController::class, 'index'])->middleware('CheckLoggedOut');
 
-    Route::prefix('customer')->group(function () {
+    Route::prefix('customer')->middleware('CheckLoggedOut')->group(function () {
         Route::get('/', [AdminController::class, 'getCustomer']);
         Route::get('edit/{id}', [AdminController::class, 'getEditCustomer']);
         Route::post('edit/{id}', [AdminController::class, 'postEditCustomer']);
@@ -74,7 +74,7 @@ Route::prefix('admin')->group(function () {
         Route::get('search', [AdminController::class, 'searchCustomer']);
     });
 
-    Route::prefix('category')->group(function () {
+    Route::prefix('category')->middleware('CheckLoggedOut')->group(function () {
         Route::get('/', [CategoryController::class, 'getCategory']);
         Route::get('add', [CategoryController::class, 'getAddCategory']);
         Route::post('add', [CategoryController::class, 'postAddCategory']);
@@ -84,7 +84,7 @@ Route::prefix('admin')->group(function () {
         Route::get('search', [AdminController::class, 'searchCategory']);
     });
 
-    Route::prefix('product')->group(function () {
+    Route::prefix('product')->middleware('CheckLoggedOut')->group(function () {
         Route::get('/', [ProductController::class, 'getProduct']);
         Route::get('add', [ProductController::class, 'getAddProduct']);
         Route::post('add', [ProductController::class, 'postAddProduct']);
@@ -94,7 +94,7 @@ Route::prefix('admin')->group(function () {
         Route::get('search', [AdminController::class, 'searchProduct']);
     });
 
-    Route::prefix('order')->group(function () {
+    Route::prefix('order')->middleware('CheckLoggedOut')->group(function () {
         Route::get('/', [AdminController::class, 'getOrder']);
         Route::get('delete/{id}', [AdminController::class, 'getDeleteOrder']);
         Route::get('search', [AdminController::class, 'searchOrder']);
