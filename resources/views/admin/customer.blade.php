@@ -8,7 +8,7 @@
             <form action="{{ url('admin/customer/search') }}" method="GET" class="search-box">
                 <i class="bx bx-search icon"></i>
                 <input type="text" name="search" placeholder="Search...">
-        </form>
+            </form>
         </header>
 
         <div class="section__body">
@@ -21,6 +21,7 @@
                             <th>Customer Name</th>
                             <th>Phone</th>
                             <th>Email</th>
+                            <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -32,6 +33,13 @@
                                     <td data-title="Customer Name">{{ $customer->customerName }}</td>
                                     <td data-title="Phone">{{ $customer->customerPhone }}</td>
                                     <td data-title="Email">{{ $customer->customerEmail }}</td>
+                                    <td data-title="Edit">
+                                        <a href="{{ url('admin/customer/edit/' . $customer->customerID) }}"
+                                            class="btn edit">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                            Edit
+                                        </a>
+                                    </td>
                                     <td data-title="Delete">
                                         <a href="{{ url('admin/customer/delete/' . $customer->customerID) }}"
                                             class="btn delete" onclick="confirmation(event)">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
 use App\Models\Customer;
 use App\Models\Product;
@@ -55,6 +56,29 @@ class AdminController extends Controller
     public function getCustomer() {
         $customers = Customer::orderBy('customerID', 'DESC')->paginate(4);
         return view('admin.customer', compact('customers'));
+    }
+
+    public function getEditCustomer($id) {
+        $customer = Customer::find($id);
+        return view('admin.editcustomer', compact('customer'));
+    }
+
+    public function postEditCustomer(Request $request) {
+        $request->validate([
+            'customerPhone' => 'required|unique:customers,customerPhone,'.$request->id.',customerID',
+            'customerEmail' => 'required|email|unique:customers,customerEmail,'.$request->id.',customerID',
+            'customerName' => 'required',
+            'customerPass' => 'nullable|min:6'
+        ]);
+        $customer = Customer::find($request->id);
+        $customer->customerPhone = $request->input('customerPhone');
+        $customer->customerEmail = $request->input('customerEmail');
+        $customer->customerName = $request->input('customerName');
+        if ($request->filled('customerPass')) {
+            $customer->customerPass = Hash::make($request->input('customerPass'));
+        }
+        $customer->save();
+        return redirect()->back()->with('success', 'Customer updated successfully!');
     }
 
     public function getDeleteCustomer($id) {

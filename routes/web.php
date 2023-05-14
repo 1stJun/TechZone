@@ -68,6 +68,8 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('customer')->group(function () {
         Route::get('/', [AdminController::class, 'getCustomer']);
+        Route::get('edit/{id}', [AdminController::class, 'getEditCustomer']);
+        Route::post('edit/{id}', [AdminController::class, 'postEditCustomer']);
         Route::get('delete/{id}', [AdminController::class, 'getDeleteCustomer']);
         Route::get('search', [AdminController::class, 'searchCustomer']);
     });
