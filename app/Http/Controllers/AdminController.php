@@ -35,7 +35,7 @@ class AdminController extends Controller
         $admin = Admin::where('adminUsername', $credentials['username'])->first();
     
         if($admin) {
-            if($admin->adminPass == $credentials['password']) {
+            if(Hash::check($credentials['password'], $admin->adminPass) ) {
                 $request->session()->put('user_name', $admin->adminFullName);
                 return redirect('admin/index');
             }
