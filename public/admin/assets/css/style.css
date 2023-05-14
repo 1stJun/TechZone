@@ -137,7 +137,8 @@ body {
     margin-right: 8px;
 }
 
-.btn.add {
+.btn.add,
+.btn.view {
     background-color: var(--primary-color);
 }
 
@@ -543,4 +544,65 @@ form .button:hover {
     text-decoration: none;
     color: #fff;
     display: block;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    display: none;
+}
+
+.modal__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal__body {
+    margin: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.order-wrapper {
+    padding: 12px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.detail-info {
+    display: flex;
+}
+
+.detail-info li {
+    list-style: none;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.order-info,
+.customer-info {
+    width: 50%;
+}
+
+.order-info {
+    padding-right: 16px;
+}
+
+.customer-info {
+    padding-left: 16px;
+}
+
+.order-items {
+    margin-top: 12px;
+}
+
+.hidden-check:checked ~ .modal {
+    display: flex;
 }
