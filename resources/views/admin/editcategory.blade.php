@@ -18,7 +18,7 @@
                             <div class="input-box category">
                                 <span class="details">Name</span>
                                 <input type="text" id="name" name="name" placeholder="Enter category name"
-                                    value="{{ old('name') }}">
+                                    value="{{ $category->catName }}">
                                 @if ($errors->has('name'))
                                     <span class="text-danger">{{ $errors->first('name') }}</span>
                                 @endif

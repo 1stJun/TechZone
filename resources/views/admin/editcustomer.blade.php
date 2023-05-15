@@ -18,7 +18,7 @@
                             <div class="input-box">
                                 <span class="details">Name</span>
                                 <input type="text" id="customerName" name="customerName"
-                                    placeholder="Enter customer name" value="{{ old('customerName') }}">
+                                    placeholder="Enter customer name" value="{{ $customer->customerName }}">
                                 @if ($errors->has('customerName'))
                                     <span class="text-danger">{{ $errors->first('customerName') }}</span>
                                 @endif
@@ -26,7 +26,7 @@
                             <div class="input-box">
                                 <span class="details">Email</span>
                                 <input type="email" id="customerEmail" name="customerEmail"
-                                    placeholder="Enter customer email" value="{{ old('customerEmail') }}">
+                                    placeholder="Enter customer email" value="{{ $customer->customerEmail }}">
                                 @if ($errors->has('customerEmail'))
                                     <span class="text-danger">{{ $errors->first('customerEmail') }}</span>
                                 @endif
@@ -34,7 +34,7 @@
                             <div class="input-box">
                                 <span class="details">Phone</span>
                                 <input type="text" id="customerPhone" name="customerPhone"
-                                    placeholder="Enter customer phone" value="{{ old('customerPhone') }}">
+                                    placeholder="Enter customer phone" value="{{ $customer->customerPhone }}">
                                 @if ($errors->has('customerPhone'))
                                     <span class="text-danger">{{ $errors->first('customerPhone') }}</span>
                                 @endif

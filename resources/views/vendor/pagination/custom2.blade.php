@@ -47,7 +47,7 @@
             </li>
         @else
             <li class="pagination-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                <a href="#" class="pagination-item__link">
+                <a href="" class="pagination-item__link">
                     <i class="pagination-item__icon fa-solid fa-angle-down fa-rotate-270"></i>
                 </a>
             </li>
