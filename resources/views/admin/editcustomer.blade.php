@@ -41,8 +41,7 @@
                             </div>
                             <div class="input-box">
                                 <span class="details">Password</span>
-                                <input type="text" id="customerPass" name="customerPass"
-                                    placeholder="Enter customer password" value="{{ $customer->customerPass }}">
+                                <input type="text" id="customerPass" name="customerPass">
                                 @if ($errors->has('customerPass'))
                                     <span class="text-danger">{{ $errors->first('customerPass') }}</span>
                                 @endif
