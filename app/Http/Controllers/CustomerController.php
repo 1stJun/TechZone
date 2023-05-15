@@ -16,7 +16,7 @@ use App\Models\OrderDetail;
 class CustomerController extends Controller
 {
     public function index() {
-        $products = Product::paginate(4);
+        $products = Product::paginate(8);
         return view('customer.index', compact('products'));
     }
 

@@ -29,8 +29,8 @@
                             <th>Image</th>
                             <th>Price</th>
                             {{-- <th>Quantity</th>
-                    <th>Description</th>
-                    <th>Category</th> --}}
+                            <th>Description</th>
+                            <th>Category</th> --}}
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -46,8 +46,8 @@
                                     </td>
                                     <td data-title="Price">{{ number_format($product->productPrice, 0, ',', '.') }} VND</td>
                                     {{-- <td data-title="Quantity">{{ $product->productQuantity }}</td>
-                        <td data-title="Description">{{ $product->productDescription }}</td>
-                        <td data-title="Category">{{ $product->catName }}</td> --}}
+                                     <td data-title="Description">{{ $product->productDescription }}</td>
+                                     <td data-title="Category">{{ $product->catName }}</td> --}}
                                     <td data-title="Edit">
                                         <a href="{{ url('admin/product/edit/' . $product->productID) }}" class="btn edit">
                                             <i class="fa-solid fa-pen-to-square"></i>
