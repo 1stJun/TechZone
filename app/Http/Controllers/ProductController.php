@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\OrderDetail;
 
 use Illuminate\Http\Request;
 
@@ -72,8 +73,15 @@ class ProductController extends Controller
     }
 
     public function getDeleteProduct($id) {
-        Product::where('productID', $id)->delete();
-        return back();
+        $product = Product::find($id);
+        if ($product) {
+            $hasOrders = OrderDetail::where('productID', $product->productID)->exists();
+            if ($hasOrders) {
+                return redirect('admin/product')->with('error', 'Cannot delete the product. It has associated orders.');
+            }
+            $product->delete();
+            return back();
+        }
     }
 
     public function search(Request $request) {

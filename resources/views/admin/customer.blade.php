@@ -14,6 +14,9 @@
         <div class="section__body">
             <h1>Customers</h1>
             <div class="main-content">
+                @if (Session::has('error'))
+                    <p style="color: red;">{{ Session::get('error') }}</p>
+                @endif
                 <table class="content-table">
                     <thead>
                         <tr>

@@ -82,8 +82,15 @@ class AdminController extends Controller
     }
 
     public function getDeleteCustomer($id) {
-        Customer::destroy($id);
-        return back();
+        $customer = Customer::find($id);
+        if ($customer) {
+            $hasOrders = Order::where('customerID', $customer->customerID)->exists();
+            if ($hasOrders) {
+                return redirect('admin/customer')->with('error', 'Cannot delete the customer. It has associated orders.');
+            }
+            $customer->delete();
+            return back();
+        }
     }
 
     public function getOrder() {

@@ -8,7 +8,7 @@
             <form action="{{ url('admin/product/search') }}" method="GET" class="search-box">
                 <i class="bx bx-search icon"></i>
                 <input type="text" name="search" placeholder="Search...">
-        </form>
+            </form>
         </header>
 
         <div class="section__body">
@@ -18,6 +18,9 @@
                     <i class="fa-solid fa-plus"></i>
                     Add new
                 </a>
+                @if (Session::has('error'))
+                    <p style="color: red;">{{ Session::get('error') }}</p>
+                @endif
                 <table class="content-table">
                     <thead>
                         <tr>

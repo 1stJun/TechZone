@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
+use App\Models\Product;
 
 use Illuminate\Http\Request;
 
@@ -41,5 +42,16 @@ class CategoryController extends Controller
         return redirect()->back()->with('success', 'Category updated successfully!');
     }
 
+    public function getDeleteCategory($id) {
+        $category = Category::find($id);
+        if ($category) {
+            $hasProducts = Product::where('catID', $category->catID)->exists();
+            if ($hasProducts) {
+                return redirect('admin/category')->with('error', 'Cannot delete the category. It has associated products.');
+            }
+            $category->delete();
+            return back();
+        }
+    }
 
 }
