@@ -50,8 +50,7 @@
                             </li>
                         @else
                             <li class="header__navbar-item header__navbar-user">
-                                <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
-                                    alt="" class="header__navbar-user-img">
+                                <img src="img/user_avatar.png" alt="" class="header__navbar-user-img">
                                 <span class="header__navbar-user-name">{{ session('customerName') }}</span>
 
                                 <ul class="header__navbar-user-menu">
@@ -182,8 +181,8 @@
                                         <!-- Cart item -->
                                         @foreach ($cartItems as $item)
                                             <li class="header__cart-item">
-                                                <img src="img/{{ $item->product['productImage'] }}"
-                                                    alt="" class="header__cart-img">
+                                                <img src="img/{{ $item->product['productImage'] }}" alt=""
+                                                    class="header__cart-img">
                                                 <div class="header__cart-item-info">
                                                     <div class="header__cart-item-head">
                                                         <h5 class="header__cart-item-name">

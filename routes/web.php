@@ -97,6 +97,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('order')->middleware('CheckLoggedOut')->group(function () {
         Route::get('/', [AdminController::class, 'getOrder']);
         Route::get('delete/{id}', [AdminController::class, 'getDeleteOrder']);
+        Route::get('detail/{orderID}', [AdminController::class, 'viewOrderDetail']);
         Route::get('search', [AdminController::class, 'searchOrder']);
     });
 

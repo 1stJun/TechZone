@@ -90,11 +90,19 @@ class AdminController extends Controller
         $orders = Order::select('orders.*', 'customers.*')
                         ->join('customers', 'orders.customerID', '=', 'customers.customerID')
                         ->orderByDesc('order_date')
-                        ->paginate(4);
+                        ->paginate(4);              
+        return view('admin.order', compact('orders'));
+    }
+
+    public function viewOrderDetail($orderID) {
+        $order = Order::select('orders.*', 'customers.*')
+                    ->join('customers', 'orders.customerID', '=', 'customers.customerID')
+                    ->find($orderID);
         $items = OrderDetail::select('order_details.*', 'products.*')
-                        ->join('products', 'order_details.productID', '=', 'products.productID') 
-                        ->get();               
-        return view('admin.order', compact('orders', 'items'));
+                        ->join('products', 'order_details.productID', '=', 'products.productID')
+                        ->where('orderID', $orderID)
+                        ->get();
+        return view('admin.detail', compact('order', 'items'));
     }
 
     public function getDeleteOrder($id) {
