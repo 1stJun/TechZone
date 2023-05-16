@@ -15,7 +15,7 @@ class CheckCustomerLogout
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->session()->has('customerID')) {
+        if (!$request->session()->has('customerName')) {
             return redirect('customer/login');
         }
         return $next($request);

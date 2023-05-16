@@ -12,15 +12,21 @@
                         @csrf
                         <div class="profile">
                             <h1>My Profile</h1>
-                            @if (Session::has('success'))
-                                <span style="color: red;">{{ Session::get('success') }}</span>
-                            @endif
                             <div class="profile-info">
                                 <div class="profile-image">
                                     <img src="img/user_avatar.png" alt="Customer Avatar">
                                 </div>
                                 <table width="100%" class="profile-details">
                                     <tr>
+                                        @if (Session::has('success'))
+                                            <tr>
+                                                <td colspan="2" style="text-align: center;">
+                                                    <span style="color: red; font-size: 1.025em;">
+                                                        {{ Session::get('success') }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        @endif
                                         <td class="title"><strong>Name</strong></td>
                                         <td>
                                             <div class="profile__group">
