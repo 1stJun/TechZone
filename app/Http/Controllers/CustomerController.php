@@ -55,13 +55,14 @@ class CustomerController extends Controller
         $customer = Customer::where('customerEmail', $request->customerEmail)->first();
         if ($customer) {
             if (Hash::check($request->customerPass, $customer->customerPass)) {
+                $request->session()->put('customerID', $customer->customerID);
                 $request->session()->put('customerPhone', $customer->customerPhone);
                 $request->session()->put('customerEmail', $customer->customerEmail);
                 $request->session()->put('customerName', $customer->customerName);
                 return redirect('customer/index');
             }
             else {
-                return back()->with('fail','Password is not macth');
+                return back()->with('failPass','Password is not macth');
             }
         }
         else {
@@ -72,6 +73,42 @@ class CustomerController extends Controller
     public function getLogout() {
         session()->forget('customerName');  
         return redirect('customer/login');
+    }
+
+    public function getProfile() {
+        $customerID = session('customerID');
+        $customer = Customer::find($customerID);
+        return view('customer.profile', compact('customer'));
+    }
+
+    public function postProfile(Request $request) {
+        $customerID = session('customerID');
+        $validatedData = $request->validate([
+            'customerPhone' => 'required|unique:customers,customerPhone,'.$customerID.',customerID',
+            'customerEmail' => 'required|email|unique:customers,customerEmail,'.$customerID.',customerID',
+            'customerName' => 'required',
+            'oldPassword' => 'nullable',
+            'newPassword' => 'nullable|min:6|required_with:confirmPassword|same:confirmPassword',
+            'confirmPassword' => 'nullable',
+        ]);
+        $customer = Customer::find($customerID);
+        $customer->customerEmail = $validatedData['customerEmail'];
+        $customer->customerPhone = $validatedData['customerPhone'];
+        $customer->customerName = $validatedData['customerName'];
+        if (!empty($validatedData['oldPassword'])) {
+            if (Hash::check($validatedData['oldPassword'], $customer->customerPass)) {
+                $customer->customerPass = Hash::make($validatedData['newPassword']);
+                $customer->save();
+                $this->getLogout();
+                return redirect('customer/login');
+            } else {
+                return redirect()->back()->with('fail', 'The old password field must match customer\'s password.');
+            }
+        } elseif (!empty($validatedData['newPassword'])) {
+            return redirect()->back()->with('fail', 'The old password field is required.');
+        }
+        $customer->save();
+        return redirect()->back()->with('success', 'Customer updated successfully!');
     }
 
     public function showByCategory($id)

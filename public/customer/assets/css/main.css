@@ -65,7 +65,7 @@
     background-color: var(--white-color);
     list-style: none;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-    display: none;
+    /* display: none; */
 }
 
 .header__navbar-user-menu::before {
@@ -1332,4 +1332,82 @@ table tbody a {
 
 .text-center a:hover {
     color: var(--hover-primary-color);
+}
+
+/* Profile */
+table,
+tr,
+td {
+    border: none;
+}
+
+table td {
+    padding: 8px 0;
+    text-align: left;
+}
+
+.profile {
+    padding: 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.profile h2 {
+    text-align: center;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+
+.profile-details {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-left: 20px;
+}
+
+.profile-details .title {
+    text-align: right;
+    padding-right: 16px;
+    width: 25%;
+}
+
+.profile__group {
+    text-align: left;
+}
+
+.profile__input {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    font-size: 1.6rem;
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
+    outline: none;
+}
+
+.profile-details p {
+    margin: 5px 0;
+}
+
+.profile-actions {
+    text-align: center;
+}
+
+.btn.btn-save {
+    margin-bottom: 20px;
+    padding: 0 12px;
+    border-radius: 5px;
+    background-color: #027bfe;
+    color: var(--white-color);
 }

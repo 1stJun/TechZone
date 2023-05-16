@@ -51,9 +51,16 @@
                         @else
                             <li class="header__navbar-item header__navbar-user">
                                 <img src="img/user_avatar.png" alt="" class="header__navbar-user-img">
-                                <span class="header__navbar-user-name">{{ session('customerName') }}</span>
+                                <span class="header__navbar-user-name">{{ $customer->customerName }}</span>
 
                                 <ul class="header__navbar-user-menu">
+                                    <li class="header__navbar-user-item">
+                                        <a href="{{ url('customer/profile') }}">
+                                            <i class="fa-solid fa-user"></i>
+                                            My Profile
+                                        </a>
+                                    </li>
+                                    <hr style="margin: 0;">
                                     <li class="header__navbar-user-item">
                                         <a href="{{ url('customer/logout') }}">
                                             <i class="fa-solid fa-right-from-bracket"></i>

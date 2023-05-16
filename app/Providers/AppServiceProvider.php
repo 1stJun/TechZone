@@ -36,5 +36,11 @@ class AppServiceProvider extends ServiceProvider
         //
         $data = ['categories' => Category::orderBy('catID', 'ASC')->get()];
         view()->share($data);
+        //
+        View::composer('*', function ($view) {
+            $customerID = session('customerID');
+            $customer = Customer::find($customerID);
+            $view->with('customer', $customer);
+        });
     }
 }

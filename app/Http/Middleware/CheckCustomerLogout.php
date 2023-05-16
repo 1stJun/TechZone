@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckCustomerLogin
+class CheckCustomerLogout
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,8 @@ class CheckCustomerLogin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->session()->has('customerID')) {
-            return redirect('customer/index');
+        if (!$request->session()->has('customerID')) {
+            return redirect('customer/login');
         }
         return $next($request);
     }

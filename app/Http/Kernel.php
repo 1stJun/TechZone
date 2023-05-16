@@ -54,6 +54,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareAliases = [
         'CheckCustomerLogin' => \App\Http\Middleware\CheckCustomerLogin::class,
+        'CheckCustomerLogout' => \App\Http\Middleware\CheckCustomerLogout::class,
         'CheckLoggedIn' => \App\Http\Middleware\CheckLoggedIn::class,
         'CheckLoggedOut' => \App\Http\Middleware\CheckLoggedOut::class,
         'auth' => \App\Http\Middleware\Authenticate::class,

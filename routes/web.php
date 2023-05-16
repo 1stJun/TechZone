@@ -37,6 +37,11 @@ Route::prefix('customer')->group(function () {
 
     Route::get('logout', [CustomerController::class, 'getLogout']);
 
+    Route::prefix('profile')->middleware('CheckCustomerLogout')->group(function () {
+        Route::get('/', [CustomerController::class, 'getProfile']);
+        Route::post('/{customerID}', [CustomerController::class, 'postProfile']);
+    });
+
     Route::prefix('category')->group(function () {
         Route::get('{id}', [CustomerController::class, 'showByCategory']);
     });

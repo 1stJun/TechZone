@@ -24,6 +24,8 @@
                             </div>
                             @if ($errors->has('customerEmail'))
                                 <span class="text-danger">{{ $errors->first('customerEmail') }}</span>
+                            @elseif (Session::has('fail'))
+                                <span class="text-danger">{{ Session::get('fail') }}</span>
                             @endif
                             <div class="auth-form__group">
                                 <input type="password" name="customerPass" class="auth-form__input" placeholder="Password">
@@ -31,6 +33,8 @@
                             </div>
                             @if ($errors->has('customerPass'))
                                 <span class="text-danger">{{ $errors->first('customerPass') }}</span>
+                            @elseif (Session::has('failPass'))
+                                <span class="text-danger">{{ Session::get('failPass') }}</span>
                             @endif
                         </div>
 
@@ -40,25 +44,25 @@
                         </div>
 
                         <!-- <div class="separate">
-                                                        <div class="cross"></div>
-                                                        <span class="or">OR</span>
-                                                        <div class="cross"></div>
-                                                    </div>
+                                                                    <div class="cross"></div>
+                                                                    <span class="or">OR</span>
+                                                                    <div class="cross"></div>
+                                                                </div>
 
-                                                    <div class="auth-form__socials">
-                                                        <button class="btn btn--normal">
-                                                            <div class="social-icon">
-                                                                <div class="social-icon__facebook"></div>
-                                                            </div>
-                                                            <span>Facebook</span>
-                                                        </button>
-                                                        <button class="btn btn--normal">
-                                                            <div class="social-icon">
-                                                                <div class="social-icon__google"></div>
-                                                            </div>
-                                                            <span>Google</span>
-                                                        </button>
-                                                    </div> -->
+                                                                <div class="auth-form__socials">
+                                                                    <button class="btn btn--normal">
+                                                                        <div class="social-icon">
+                                                                            <div class="social-icon__facebook"></div>
+                                                                        </div>
+                                                                        <span>Facebook</span>
+                                                                    </button>
+                                                                    <button class="btn btn--normal">
+                                                                        <div class="social-icon">
+                                                                            <div class="social-icon__google"></div>
+                                                                        </div>
+                                                                        <span>Google</span>
+                                                                    </button>
+                                                                </div> -->
                     </form>
                 </div>
             </div>
