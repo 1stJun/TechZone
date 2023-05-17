@@ -39,13 +39,6 @@
                                     <span class="text-danger">{{ $errors->first('customerPhone') }}</span>
                                 @endif
                             </div>
-                            <div class="input-box">
-                                <span class="details">Password</span>
-                                <input type="password" id="customerPass" name="customerPass">
-                                @if ($errors->has('customerPass'))
-                                    <span class="text-danger">{{ $errors->first('customerPass') }}</span>
-                                @endif
-                            </div>
                         </div>
                         <button type="submit" class="button">Update</button>
                         <a href="{{ url('admin/customer') }}" class="button">Cancel</a>

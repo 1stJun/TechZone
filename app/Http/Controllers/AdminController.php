@@ -77,15 +77,11 @@ class AdminController extends Controller
             'customerPhone' => 'required|unique:customers,customerPhone,'.$request->id.',customerID',
             'customerEmail' => 'required|email|unique:customers,customerEmail,'.$request->id.',customerID',
             'customerName' => 'required',
-            'customerPass' => 'nullable|min:6'
         ]);
         $cus = Customer::find($request->id);
         $cus->customerPhone = $request->input('customerPhone');
         $cus->customerEmail = $request->input('customerEmail');
         $cus->customerName = $request->input('customerName');
-        if ($request->filled('customerPass')) {
-            $cus->customerPass = Hash::make($request->input('customerPass'));
-        }
         $cus->save();
         return redirect()->back()->with('success', 'Customer updated successfully!');
     }
