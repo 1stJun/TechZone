@@ -15,11 +15,11 @@ use App\Models\OrderDetail;
 class AdminController extends Controller
 {
     public function index() {
-        $customer = Customer::count();
+        $customers = Customer::count();
         $category = Category::count();
         $product = Product::count();
         $order = Order::count(); 
-        return view('admin.index', compact('customer', 'category', 'product', 'order'));
+        return view('admin.index', compact('customers', 'category', 'product', 'order'));
     }
 
     public function getLogin() {
@@ -58,9 +58,18 @@ class AdminController extends Controller
         return view('admin.customer', compact('customers'));
     }
 
-    public function getEditCustomer($id) {
-        $customer = Customer::find($id);
-        return view('admin.editcustomer', compact('customer'));
+    public function getEditCustomer($id) {        
+        $cus = Customer::find($id);
+        if (Session::get('customerID') == $cus->customerID) {
+            return redirect()->back()->with('error', 'The logged in customer cannot be edited.');
+        }
+        if ($cus) {
+            $hasOrders = Order::where('customerID', $cus->customerID)->exists();
+            if ($hasOrders) {
+                return redirect('admin/customer')->with('error', 'Cannot delete the customer. It has associated orders.');
+            }
+            return view('admin.editcustomer', compact('cus'));
+        }
     }
 
     public function postEditCustomer(Request $request) {
@@ -70,27 +79,30 @@ class AdminController extends Controller
             'customerName' => 'required',
             'customerPass' => 'nullable|min:6'
         ]);
-        $customer = Customer::find($request->id);
-        $customer->customerPhone = $request->input('customerPhone');
-        $customer->customerEmail = $request->input('customerEmail');
-        $customer->customerName = $request->input('customerName');
+        $cus = Customer::find($request->id);
+        $cus->customerPhone = $request->input('customerPhone');
+        $cus->customerEmail = $request->input('customerEmail');
+        $cus->customerName = $request->input('customerName');
         if ($request->filled('customerPass')) {
-            $customer->customerPass = Hash::make($request->input('customerPass'));
+            $cus->customerPass = Hash::make($request->input('customerPass'));
         }
-        $customer->save();
+        $cus->save();
         return redirect()->back()->with('success', 'Customer updated successfully!');
     }
 
     public function getDeleteCustomer($id) {
-        $customer = Customer::find($id);
-        if ($customer) {
-            $hasOrders = Order::where('customerID', $customer->customerID)->exists();
+        $cus = Customer::find($id);
+        if (Session::get('customerID') == $cus->customerID) {
+            return redirect()->back()->with('error', 'The logged in customer cannot be deleted.');
+        }        
+        if ($cus) {
+            $hasOrders = Order::where('customerID', $cus->customerID)->exists();
             if ($hasOrders) {
                 return redirect('admin/customer')->with('error', 'Cannot delete the customer. It has associated orders.');
             }
-            $customer->delete();
-            return back();
-        }
+            $cus->delete();
+            return redirect()->back();
+        }        
     }
 
     public function getOrder() {

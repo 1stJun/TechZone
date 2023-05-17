@@ -1335,13 +1335,13 @@ table tbody a {
 }
 
 /* Profile */
-table,
-tr,
-td {
+table.profile-details,
+table.profile-details tr,
+table.profile-details td {
     border: none;
 }
 
-table td {
+table.profile-details td {
     padding: 8px 0;
     text-align: left;
 }

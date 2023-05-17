@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function getCategory() {
-        $categories = Category::orderBy('catID', 'ASC')->paginate(4);
+        $categories = Category::orderBy('catID', 'DESC')->paginate(6);
         return view('admin.category', compact('categories'));
     }
 
@@ -29,7 +29,13 @@ class CategoryController extends Controller
 
     public function getEditCategory($id) {
         $category = Category::find($id);
-        return view('admin.editcategory', compact('category'));
+        if ($category) {
+            $hasProducts = Product::where('catID', $category->catID)->exists();
+            if ($hasProducts) {
+                return redirect('admin/category')->with('error', 'Cannot edit the category. It has associated products.');
+            }
+            return view('admin.editcategory', compact('category'));
+        }
     }
 
     public function postEditCategory(Request $request) {

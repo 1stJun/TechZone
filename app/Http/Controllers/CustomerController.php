@@ -71,7 +71,10 @@ class CustomerController extends Controller
     }
 
     public function getLogout() {
+        session()->forget('customerID');  
         session()->forget('customerName');  
+        session()->forget('customerEmail');  
+        session()->forget('customerPhone');  
         return redirect('customer/login');
     }
 

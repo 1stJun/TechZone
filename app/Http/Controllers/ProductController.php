@@ -47,7 +47,13 @@ class ProductController extends Controller
     public function getEditProduct($id) {
         $product = Product::where('productID', $id)->first();
         $categories = Category::get();
-        return view('admin.editproduct', compact('product', 'categories'));        
+        if ($product) {
+            $hasOrders = OrderDetail::where('productID', $product->productID)->exists();
+            if ($hasOrders) {
+                return redirect('admin/product')->with('error', 'Cannot edit the product. It has associated orders.');
+            }
+            return view('admin.editproduct', compact('product', 'categories'));      
+        }
     }
 
     public function postEditProduct(Request $request) {

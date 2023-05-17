@@ -11,7 +11,7 @@
                 <div class="small-box bg-customer">
                     <div class="inner">
                         <span class="inner-info">
-                            <h2>{{ $customer }}</h2>
+                            <h2>{{ $customers }}</h2>
                             <p>Customers</p>
                         </span>
                         <span class="icon">

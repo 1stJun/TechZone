@@ -58,7 +58,7 @@
                                             </td>
                                             <td class="remove">
                                                 <a href="{{ url('customer/cart/delete/' . $item->product['productID']) }}"
-                                                    class="cart btn">
+                                                    class="cart btn" onclick="confirmation(event)">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </td>
@@ -133,6 +133,27 @@
                     plusBtn.classList.add('disabled');
                 }
             }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+    <script>
+        function confirmation(e) {
+            e.preventDefault();
+            var urlToRedirect = e.currentTarget.getAttribute('href');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = urlToRedirect;
+                }
+            })
         }
     </script>
 @endsection
