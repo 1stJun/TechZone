@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\OrderDetail;
-
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -31,7 +30,6 @@ class ProductController extends Controller
             'quantity' => 'required|integer',
             'description' => 'nullable|string|max:500',
         ]);
-
         $product = new Product();
         $product->productName = $request->name;
         $product->productImage = $request->image;
@@ -43,7 +41,8 @@ class ProductController extends Controller
         $product->save();
         return redirect()->back()->with('success', 'Product added successfully!');
     }
-
+ 
+    
     public function getEditProduct($id) {
         $product = Product::where('productID', $id)->first();
         $categories = Category::get();
