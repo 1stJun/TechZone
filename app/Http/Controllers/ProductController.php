@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function getProduct() {
         $products = Product::select('products.*', 'categories.catName')
                 ->join('categories', 'products.catID', '=', 'categories.catID')
-                ->orderBy('productID', 'ASC')
+                ->orderBy('productID', 'DESC')
                 ->paginate(4);
         return view('admin.product', compact('products'));
     }
