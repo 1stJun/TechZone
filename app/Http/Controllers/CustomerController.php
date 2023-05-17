@@ -182,11 +182,10 @@ class CustomerController extends Controller
         $totalAmount = collect($cart)->sum(function($item) {
             return $item['product']['productPrice'] * $item['quantity'];
         });
-        $customer = session('customerName');
-        if (!$customer) {
+        $customerID = session('customerID');
+        if (!$customerID) {
             return redirect('customer/login');
         }
-        $customerID = Customer::where('customerName', $customer)->value('customerID');
         $order = new Order();
         $order->customerID = $customerID;
         $order->order_date = now();

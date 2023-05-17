@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderDetail;
 
 use Illuminate\Http\Request;
 
@@ -29,10 +31,11 @@ class CategoryController extends Controller
 
     public function getEditCategory($id) {
         $category = Category::find($id);
+        $product = Product::where('catID', $category->catID)->first();
         if ($category) {
-            $hasProducts = Product::where('catID', $category->catID)->exists();
-            if ($hasProducts) {
-                return redirect('admin/category')->with('error', 'Cannot edit the category. It has associated products.');
+            $hasOrders = OrderDetail::where('productID', $product->productID)->exists();
+            if ($hasOrders) {
+                return redirect('admin/category')->with('error', 'Cannot edit the category. It has associated orders.');
             }
             return view('admin.editcategory', compact('category'));
         }
