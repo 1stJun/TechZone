@@ -94,46 +94,48 @@
     </div>
 
     <script>
-        const minusBtn = document.querySelector('.minus');
-        const plusBtn = document.querySelector('.plus');
-        const qtyInput = document.querySelector('.qty__wrapper input');
-        const minQty = parseInt(qtyInput.getAttribute('min'));
-        const maxQty = parseInt(qtyInput.getAttribute('max'));
+        document.addEventListener('DOMContentLoaded', function() {
+            const minusBtn = document.querySelector('.minus');
+            const plusBtn = document.querySelector('.plus');
+            const qtyInput = document.querySelector('.qty__wrapper input');
+            const minQty = parseInt(qtyInput.getAttribute('min'));
+            const maxQty = parseInt(qtyInput.getAttribute('max'));
 
-        minusBtn.addEventListener('click', decrQty);
-        plusBtn.addEventListener('click', incrQty);
+            minusBtn.addEventListener('click', decrQty);
+            plusBtn.addEventListener('click', incrQty);
 
-        let qty = parseInt(qtyInput.value);
+            let qty = parseInt(qtyInput.value);
 
-        if (qty == minQty) {
-            minusBtn.classList.add('disabled');
-        }
-
-        function decrQty() {
-            if (qty > 1) {
-                qty--;
-                qtyInput.value = qty;
-                if (qty == 1) {
-                    minusBtn.classList.add('disabled');
-                }
-                if (qty < maxQty) {
-                    plusBtn.classList.remove('disabled');
-                }
+            if (qty == minQty) {
+                minusBtn.classList.add('disabled');
             }
-        }
 
-        function incrQty() {
-            if (qty < maxQty) {
-                qty++;
-                qtyInput.value = qty;
+            function decrQty() {
                 if (qty > 1) {
-                    minusBtn.classList.remove('disabled');
-                }
-                if (qty == maxQty) {
-                    plusBtn.classList.add('disabled');
+                    qty--;
+                    qtyInput.value = qty;
+                    if (qty == 1) {
+                        minusBtn.classList.add('disabled');
+                    }
+                    if (qty < maxQty) {
+                        plusBtn.classList.remove('disabled');
+                    }
                 }
             }
-        }
+
+            function incrQty() {
+                if (qty < maxQty) {
+                    qty++;
+                    qtyInput.value = qty;
+                    if (qty > 1) {
+                        minusBtn.classList.remove('disabled');
+                    }
+                    if (qty == maxQty) {
+                        plusBtn.classList.add('disabled');
+                    }
+                }
+            }
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
     <script>

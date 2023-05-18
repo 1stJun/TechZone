@@ -80,4 +80,58 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const alertMsg = document.querySelector('#alert-msg');
+            const minusBtn = document.querySelector('.minus-btn');
+            const plusBtn = document.querySelector('.plus-btn');
+            const qtyInput = document.querySelector('.quantity-input input');
+            const minQty = parseInt(qtyInput.getAttribute('min'));
+            const maxQty = parseInt(qtyInput.getAttribute('max'));
+
+            minusBtn.addEventListener('click', decreaseQty);
+            plusBtn.addEventListener('click', increaseQty);
+            qtyInput.addEventListener('input', inputQty);
+
+            let qty = parseInt(qtyInput.value);
+
+            function inputQty() {
+                if (isNaN(qty) || qty < minQty) {
+                    qty = minQty;
+                } else if (qty > maxQty) {
+                    qty = maxQty;
+                }
+                qtyInput.value = qty;
+            }
+
+            function decreaseQty() {
+                if (qty > 1) {
+                    qty--;
+                    qtyInput.value = qty;
+                    if (qty == 1) {
+                        minusBtn.classList.add('disabled');
+                    }
+                    if (qty < maxQty) {
+                        plusBtn.classList.remove('disabled');
+                        alertMsg.style.display = 'none';
+                    }
+                }
+            }
+
+            function increaseQty() {
+                if (qty < maxQty) {
+                    qty++;
+                    qtyInput.value = qty;
+                    if (qty > 1) {
+                        minusBtn.classList.remove('disabled');
+                    }
+                    if (qty == maxQty) {
+                        plusBtn.classList.add('disabled');
+                        alertMsg.style.display = 'block';
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

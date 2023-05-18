@@ -26,9 +26,7 @@
                             <div class="input-box">
                                 <span class="details">Image</span>
                                 <input type="file" id="image" name="image">
-                                @if ($product->productImage)
-                                    <label for="image">Current Image: {{ $product->productImage }}</label>
-                                @endif
+                                <input type="hidden" name="old_image" value="{{ $product->productImage }}">
                                 @if ($errors->has('image'))
                                     <span class="text-danger">{{ $errors->first('image') }}</span>
                                 @endif

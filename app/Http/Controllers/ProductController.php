@@ -32,7 +32,6 @@ class ProductController extends Controller
         ]);
         $product = new Product();
         $product->productName = $request->name;
-        $product->productImage = $request->image;
         $product->productPrice = $request->price;
         $product->productListPrice = $request->list_price;
         $product->productQuantity = $request->quantity;
@@ -58,22 +57,29 @@ class ProductController extends Controller
     public function postEditProduct(Request $request) {
         $request->validate([
             'name' => 'required|unique:products,productName,'.$request->id.',productID|string|max:255',
-            'image' => 'required|string|max:255',
             'price' => 'required|numeric',
             'list_price' => 'required|numeric',
             'quantity' => 'required|integer',
             'description' => 'nullable|string|max:500',
         ]);
 
-        Product::where('productID', $request->id)->update([
-            'productName' => $request->name,
-            'productImage' => $request->image,
-            'productPrice' => $request->price,
-            'productListPrice' => $request->list_price,
-            'productQuantity' => $request->quantity,
-            'productDescription' => $request->description,
-            'catID' => $request->category
-        ]);
+        $product = Product::where('productID', $request->id)->first();
+        $product->productName = $request->input('name');
+        $product->productPrice = $request->input('price');
+        $product->productListPrice = $request->input('list_price');
+        $product->productQuantity = $request->input('quantity');
+        $product->productDescription = $request->input('description');
+        $product->catID = $request->input('category');
+
+        $image = $request->input('image');
+        $oldImage = $request->input('old_image');
+        if (!empty($image)) {
+            $product->productImage = $image;
+        } else {
+            $product->productImage = $oldImage;
+        }
+        
+        $product->save();
         return redirect()->back()->with('success', 'Product updated successfully!');
     }
 
